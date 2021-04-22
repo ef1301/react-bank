@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ location }) => {
+  const { state } = location;
+  const pathname = (state && state.pathname) || "/";
+
   const [user, setUser] = useState("");
 
   const updateUser = e => {
@@ -15,7 +18,7 @@ const Login = () => {
 
       <Link
         to={{
-          pathname: "/",
+          pathname: pathname,
           state: {
             user: user
           }
