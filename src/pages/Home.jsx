@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
-import {Link} from 'react-router-dom';
+import LinkWithUser from "../components/LinkWithUser";
 
-const Home = () => {
+const Home = ({ location }) => {
+  const { state } = location;
+  const user = (state && state.user) || "";
 
   return (
     <>
-    Home
-    <Link to="/debits">Debits</Link>
-    <Link to="/credits">Credits</Link>
+      Home
+      <LinkWithUser to="debits" user={user}>
+        Debits
+      </LinkWithUser>
+      <LinkWithUser to="/credits" user={user}>
+        Credits
+      </LinkWithUser>
     </>
   );
 };
