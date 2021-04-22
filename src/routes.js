@@ -10,6 +10,7 @@ const Routes = () => {
       <Route path="/" exact component={pages.Home} />
       <Route path="/debits" exact component={pages.Debits} />
       <Route path="/credits" exact component={pages.Credits} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     </Router>
   );
