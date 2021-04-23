@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Link from "../components/Link";
 import DebitCard from "../cards/Debit";
+import AccountBalance from "../components/AccountBalance";
 import { stringifyDate, newId } from "../utils/utils";
 
 const Debits = ({ location }) => {
@@ -53,6 +54,7 @@ const Debits = ({ location }) => {
         <button onClick={updateDebit}>Enter</button>
       </div>
       <br />
+      <AccountBalance balance={balance}/>
       <div id="all-debits">
         {debit !== null &&
           debit.map((debit, index) => <DebitCard key={index} debit={debit} />)}
