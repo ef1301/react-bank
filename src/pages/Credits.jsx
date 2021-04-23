@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import Link from "../components/Link";
 import CreditCard from "../cards/Credit";
 import { stringifyDate, newId } from "../utils/utils";
 
@@ -13,8 +14,6 @@ const Credits = ({ location }) => {
 
   const defaultCredit = { description: "", amount: 0 };
   const [newCredit, setNewCredit] = useState(defaultCredit);
-
-  console.log(credit);
 
   const updateNewCredit = (e) => {
     e.preventDefault();
@@ -30,6 +29,10 @@ const Credits = ({ location }) => {
   return (
     <div id="credits">
       <h1>Credits</h1>
+      <Link to="/" user={user} balance={balance}>
+        Home
+      </Link>
+
       <div id="add-credit">
         Description:{" "}
         <input
