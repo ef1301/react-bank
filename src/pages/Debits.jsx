@@ -1,51 +1,62 @@
 import React, { useState } from "react";
 
-import DebitCard from '../cards/Debit';
+import Link from "../components/Link";
+import DebitCard from "../cards/Debit";
+import { stringifyDate, newId } from "../utils/utils";
 
-const stringifyDate = date =>
-  `${date.toLocaleDateString("en-US")} ${date.toLocaleTimeString("en-US")} `;
+const Debits = ({ location }) => {
+  const { state } = location;
+  const user = state.user;
+  const oldBalance = state.balance;
 
-const Debits = ({balance}) => {
-  const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState('');
+  const [debit, setDebit] = useState(oldBalance.debit);
+  const balance = { ...oldBalance, debit };
 
-  const handleDescription = (e) => {
-    setDescription(prevState => e.target.value);
-  }
+  const defaultDebit = { description: "", amount: 0 };
+  const [newDebit, setNewDebit] = useState(defaultDebit);
 
-  const handleAmount = (e) => {
-    setAmount(prevState => e.target.value);
-  }
-
-  const submitForm = e => {
+  const updateNewDebit = (e) => {
     e.preventDefault();
-    let date = stringifyDate(new Date());
-    const newSubmission = {
-      date, description, amount
-    };
-    console.log(newSubmission);
-    //setDebits(prevState => [...prevState, newSubmission])
-  }
+    setNewDebit((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
-  //console.log(props);
-  console.log(balance);
+  const updateDebit = (e) => {
+    const submission = { ...newDebit, id: newId(), date: stringifyDate() };
+    setDebit((prev) => [...prev, submission]);
+    setNewDebit(defaultDebit);
+  };
 
   return (
     <div id="debits">
-        <h1>Debits</h1>
-        <form id="add-debits" onSubmit={submitForm}>
-          <fieldset>
-            <legend>Add Debit.</legend>
-          <label htmlFor="debit-description">Description:</label> <br/>
-          <input type="text" id="debit-description" onChange={handleDescription}></input><br/>
-          <label htmlFor="debit-amount">Amount:</label><br/>
-          <input type="text" id="debit-amount" onChange={handleAmount}></input>
-          </fieldset>
-          <input type="submit" value="Add Debit"></input>
-        </form>
-        <div id="all-debits">
-            {/*debits !== null && debits.map((debit,index) => <DebitCard key={index} debit={debit}/>)*/}
-        </div>
+      <h1>Debits</h1>
+      <Link to="/" user={user} balance={balance}>
+        Home
+      </Link>
+
+      <div id="add-debit">
+        Description:{" "}
+        <input
+          name="description"
+          type="text"
+          value={newDebit.description}
+          onChange={updateNewDebit}
+        />
+        <br />
+        Amount:{" "}
+        <input
+          name="amount"
+          type="number"
+          value={newDebit.amount}
+          onChange={updateNewDebit}
+        />
+        <br />
+        <button onClick={updateDebit}>Enter</button>
+      </div>
+      <br />
+      <div id="all-debits">
+        {debit !== null &&
+          debit.map((debit, index) => <DebitCard key={index} debit={debit} />)}
+      </div>
     </div>
   );
 };

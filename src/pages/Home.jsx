@@ -1,43 +1,44 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import LinkWithUser from "../components/LinkWithUser";
+import Link from "../components/Link";
 
 const Home = ({ location }) => {
   const { state } = location;
   const user = (state && state.user) || "";
-  const [debits, setDebits] = useState(null);
-  const [credits, setCredits] = useState(null);
-  const balance = {credits,debits};
+  const oldBalance = (state && state.balance) || null;
+  const [balance, setBalance] = useState(oldBalance);
 
   useEffect(() => {
     const getDebits = async () => {
       await axios
         .get("https://moj-api.herokuapp.com/debits")
-        .then(res => setDebits(res.data));
+        .then((res) => setBalance((prev) => ({ ...prev, debit: res.data })));
     };
+
     const getCredits = async () => {
       await axios
         .get("https://moj-api.herokuapp.com/credits")
-        .then(res => setCredits(res.data));
+        .then((res) => setBalance((prev) => ({ ...prev, credit: res.data })));
     };
 
-    if(credits === null && debits === null) {
+    if (balance == null) {
       getDebits();
       getCredits();
     }
-  }, [credits,debits]);
 
-  console.log(balance);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       Home
-      <LinkWithUser to="/debits" user={user} balance={balance}>
+      <Link to="/debits" user={user} balance={balance}>
         Debits
-      </LinkWithUser>
-      <LinkWithUser to="/credits" user={user} balance={balance}>
+      </Link>
+      <Link to="/credits" user={user} balance={balance}>
         Credits
-      </LinkWithUser>
+      </Link>
     </>
   );
 };

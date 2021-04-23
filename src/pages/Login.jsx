@@ -3,11 +3,12 @@ import { Link } from "react-router-dom";
 
 const Login = ({ location }) => {
   const { state } = location;
-  const pathname = (state && state.pathname) || "/";
+  const pathname = state.pathname;
+  const balance = state.balance;
 
   const [user, setUser] = useState("");
 
-  const updateUser = e => {
+  const updateUser = (e) => {
     setUser(e.target.value);
   };
 
@@ -20,8 +21,9 @@ const Login = ({ location }) => {
         to={{
           pathname: pathname,
           state: {
-            user: user
-          }
+            user,
+            balance,
+          },
         }}
       >
         <button>Login</button>
