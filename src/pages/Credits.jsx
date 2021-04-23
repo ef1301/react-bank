@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Link from "../components/Link";
 import CreditCard from "../cards/Credit";
+import AccountBalance from "../components/AccountBalance";
 import { stringifyDate, newId } from "../utils/utils";
 
 const Credits = ({ location }) => {
@@ -53,6 +54,7 @@ const Credits = ({ location }) => {
         <button onClick={updateCredit}>Enter</button>
       </div>
       <br />
+      <AccountBalance balance={balance}/>
       <div id="all-credits">
         {credit !== null &&
           credit.map((credit, index) => (
