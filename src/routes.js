@@ -7,7 +7,7 @@ import { Home, Debits, Credits, Login } from "./pages";
 
 const Routes = () => {
   return (
-    <Router>
+    <Router basename={process.env.PUBLIC_URL}>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/login" exact component={Login} />
