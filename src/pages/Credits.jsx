@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Link from "../components/Link";
 import CreditCard from "../cards/Credit";
 import AccountBalance from "../components/AccountBalance";
+import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { stringifyDate, newId } from "../utils/utils";
 
 const Credits = ({ location }) => {
@@ -30,9 +32,13 @@ const Credits = ({ location }) => {
   return (
     <div id="credits">
       <h1>Credits</h1>
-      <Link to="/" user={user} balance={balance}>
-        Home
-      </Link>
+      <Card style={{ width: "10rem" }}>
+        <Card.Header>
+          <Link to="/" user={user} balance={balance}>
+            <center>Home</center>
+          </Link>
+        </Card.Header>
+      </Card>
 
       <div id="add-credit">
         Description:{" "}

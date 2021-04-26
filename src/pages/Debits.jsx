@@ -4,6 +4,8 @@ import Link from "../components/Link";
 import DebitCard from "../cards/Debit";
 import AccountBalance from "../components/AccountBalance";
 import { stringifyDate, newId } from "../utils/utils";
+import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Debits = ({ location }) => {
   const { state } = location;
@@ -30,9 +32,13 @@ const Debits = ({ location }) => {
   return (
     <div id="debits">
       <h1>Debits</h1>
-      <Link to="/" user={user} balance={balance}>
-        Home
-      </Link>
+      <Card style={{ width: "10rem" }}>
+        <Card.Header>
+          <Link to="/" user={user} balance={balance}>
+            <center>Home</center>
+          </Link>
+        </Card.Header>
+      </Card>
 
       <div id="add-debit">
         Description:{" "}
