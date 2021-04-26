@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as ReactLink } from "react-router-dom";
 
-const Link = ({ to, user, balance, children, ...rest }) => {
+const Link = ({ to, user, balance, pathname, children, ...rest }) => {
   return (
     <ReactLink
       to={{
@@ -9,6 +9,7 @@ const Link = ({ to, user, balance, children, ...rest }) => {
         state: {
           user,
           balance,
+          pathname
         },
       }}
       {...rest}

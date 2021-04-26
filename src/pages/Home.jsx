@@ -7,7 +7,7 @@ import Link from "../components/Link";
 
 const Home = ({ location }) => {
   const { state } = location;
-  const user = (state && state.user) || "";
+  const user = (state && state.user) || {name: "Bob", join: "01/01/2021"};
   const oldBalance = (state && state.balance) || null;
   const [balance, setBalance] = useState(oldBalance);
 
@@ -38,6 +38,20 @@ const Home = ({ location }) => {
       <Card.Header>
         <Link to="/" user={user} balance={balance}>
           <center>Home</center>
+        </Link>
+      </Card.Header>
+    </Card>
+    <Card style={{ width: "10rem" }}>
+      <Card.Header>
+        <Link to="/login" user={user} balance={balance} pathname="/">
+          <center>Change User</center>
+        </Link>
+      </Card.Header>
+    </Card>
+    <Card style={{ width: "10rem" }}>
+      <Card.Header>
+        <Link to="/userProfile" user={user} balance={balance}>
+          <center>User Profile</center>
         </Link>
       </Card.Header>
     </Card>
