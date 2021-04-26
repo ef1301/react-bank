@@ -21,7 +21,7 @@ const Login = ({ location }) => {
         to={{
           pathname: pathname,
           state: {
-            user,
+            user: {name: user, join: '01/01/2021'},
             balance,
           },
         }}
