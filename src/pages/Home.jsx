@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Card from 'react-bootstrap/Card';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Link from "../components/Link";
 
@@ -32,13 +34,27 @@ const Home = ({ location }) => {
 
   return (
     <>
-      Home<br></br>
-      <Link to="/debits" user={user} balance={balance}>
-        Debits<br></br>
-      </Link>
-      <Link to="/credits" user={user} balance={balance}>
-        Credits
-      </Link>
+    <Card style={{ width: "10rem" }}>
+      <Card.Header>
+        <Link to="/" user={user} balance={balance}>
+          <center>Home</center>
+        </Link>
+      </Card.Header>
+    </Card>
+    <Card style={{ width: "10rem" }}>
+      <Card.Header>
+        <Link to="/debits" user={user} balance={balance}>
+          <center>Debits</center>
+        </Link>
+      </Card.Header>
+    </Card>
+    <Card style={{ width: "10rem" }}>
+      <Card.Header>
+        <Link to="/credits" user={user} balance={balance}>
+          <center>Credits</center>
+        </Link>
+      </Card.Header>
+    </Card>
     </>
   );
 };
