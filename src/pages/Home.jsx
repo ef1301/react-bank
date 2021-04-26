@@ -32,9 +32,9 @@ const Home = ({ location }) => {
 
   return (
     <>
-      Home
+      Home<br></br>
       <Link to="/debits" user={user} balance={balance}>
-        Debits
+        Debits<br></br>
       </Link>
       <Link to="/credits" user={user} balance={balance}>
         Credits
